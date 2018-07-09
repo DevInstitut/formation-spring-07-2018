@@ -1,20 +1,20 @@
 # TP #2 - Configuration Java
 
-## Partie 1 - Service
+## Partie 1 - Repository
 
-* Créer une interface `dev.paie.services.ENTITEService` :
+* Créer une interface `dev.paie.services.ENTITERepository` :
 
 ```java
-public interface ENTITEService extends CrudService<ENTITE> {
+public interface ENTITERepository extends CrudRepository<ENTITE> {
 	
 }
 ```
 
-* Créer une implementation `dev.services.ENTITEServiceMemoire` :
+* Créer une implementation `dev.repositories.ENTITERepositoryMemoire` :
 
 ```java
 @Service
-public class ENTITEServiceMemoire implements ENTITEService {
+public class ENTITERepositoryMemoire implements ENTITERepository {
 
     private List<ENTITE> entites = new ArrayList<>();
     
@@ -32,18 +32,18 @@ public class ENTITEServiceMemoire implements ENTITEService {
 }
 ```
 
-* Créer une classe de test `dev.services.ENTITEServiceMemoireTest` :
+* Créer une classe de test `dev.repositories.ENTITERepositoryMemoireTest` :
 
 ```java
 // Sélection des classes de configuration Spring à utiliser lors du test
-@ContextConfiguration(classes = { ENTITEServiceMemoire.class })
+@ContextConfiguration(classes = { ENTITERepositoryMemoire.class })
 // Configuration JUnit pour que Spring prenne la main sur le cycle de vie du test
 @RunWith(SpringRunner.class)
-public class ENTITEServiceMemoireTest {
+public class ENTITERepositoryMemoireTest {
 
-	@Autowired private ENTITEServiceMemoire service;
+	@Autowired private ENTITERepositoryMemoire repository;
 
-	// TODO tester toutes les méthodes du service
+	// TODO tester toutes les méthodes du repository
 }
 ```
 
