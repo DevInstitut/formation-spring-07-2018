@@ -10,7 +10,7 @@ public interface ENTITEService extends CrudService<ENTITE> {
 }
 ```
 
-* Créer une implementation `dev.paie.services.ENTITEServiceMemoire` :
+* Créer une implementation `dev.services.ENTITEServiceMemoire` :
 
 ```java
 @Service
@@ -32,7 +32,7 @@ public class ENTITEServiceMemoire implements ENTITEService {
 }
 ```
 
-* Créer une classe de test `dev.paie.services.ENTITEServiceMemoireTest` :
+* Créer une classe de test `dev.services.ENTITEServiceMemoireTest` :
 
 ```java
 // Sélection des classes de configuration Spring à utiliser lors du test
