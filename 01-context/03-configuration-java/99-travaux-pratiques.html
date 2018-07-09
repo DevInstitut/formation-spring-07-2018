@@ -482,19 +482,19 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="tp-2---configuration-java">TP #2 - Configuration Java</h1>
-<h2 id="partie-1---service">Partie 1 - Service</h2>
+<h2 id="partie-1---repository">Partie 1 - Repository</h2>
 <ul>
-<li>Cr&#xE9;er une interface <code>dev.paie.services.ENTITEService</code> :</li>
+<li>Cr&#xE9;er une interface <code>dev.paie.services.ENTITERepository</code> :</li>
 </ul>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ENTITEService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">CrudService</span>&lt;<span class="hljs-title">ENTITE</span>&gt; </span>{
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ENTITERepository</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">CrudRepository</span>&lt;<span class="hljs-title">ENTITE</span>&gt; </span>{
 
 }
 </code></pre>
 <ul>
-<li>Cr&#xE9;er une implementation <code>dev.services.ENTITEServiceMemoire</code> :</li>
+<li>Cr&#xE9;er une implementation <code>dev.repositories.ENTITERepositoryMemoire</code> :</li>
 </ul>
 <pre><code class="lang-java"><span class="hljs-meta">@Service</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ENTITEServiceMemoire</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ENTITEService</span> </span>{
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ENTITERepositoryMemoire</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ENTITERepository</span> </span>{
 
     <span class="hljs-keyword">private</span> List&lt;ENTITE&gt; entites = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
 
@@ -512,17 +512,17 @@
 }
 </code></pre>
 <ul>
-<li>Cr&#xE9;er une classe de test <code>dev.services.ENTITEServiceMemoireTest</code> :</li>
+<li>Cr&#xE9;er une classe de test <code>dev.repositories.ENTITERepositoryMemoireTest</code> :</li>
 </ul>
 <pre><code class="lang-java"><span class="hljs-comment">// S&#xE9;lection des classes de configuration Spring &#xE0; utiliser lors du test</span>
-<span class="hljs-meta">@ContextConfiguration</span>(classes = { ENTITEServiceMemoire.class })
+<span class="hljs-meta">@ContextConfiguration</span>(classes = { ENTITERepositoryMemoire.class })
 <span class="hljs-comment">// Configuration JUnit pour que Spring prenne la main sur le cycle de vie du test</span>
 <span class="hljs-meta">@RunWith</span>(SpringRunner.class)
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ENTITEServiceMemoireTest</span> </span>{
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ENTITERepositoryMemoireTest</span> </span>{
 
-    <span class="hljs-meta">@Autowired</span> <span class="hljs-keyword">private</span> ENTITEServiceMemoire service;
+    <span class="hljs-meta">@Autowired</span> <span class="hljs-keyword">private</span> ENTITERepositoryMemoire repository;
 
-    <span class="hljs-comment">// TODO tester toutes les m&#xE9;thodes du service</span>
+    <span class="hljs-comment">// TODO tester toutes les m&#xE9;thodes du repository</span>
 }
 </code></pre>
 <h2 id="partie-2---mini-application-console-avec-spring">Partie 2 - Mini application console avec Spring</h2>
@@ -571,7 +571,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"TP #2 - Configuration Java","level":"1.2.3.10","depth":3,"previous":{"title":"Traitements pré-post-processeurs","level":"1.2.3.9","depth":3,"path":"01-context/03-configuration-java/09-pre-post.md","ref":"01-context/03-configuration-java/09-pre-post.md","articles":[]},"dir":"ltr"},"config":{"plugins":["auto-summary","github-edit"],"ignores":["_book","node_modules","sources"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"github-edit":{"repo":"DevInstitut/formation-spring-07-2018","branch":"master"},"auto-summary":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Rossi Oddet","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Formation Spring","gitbook":"*"},"file":{"path":"01-context/03-configuration-java/99-travaux-pratiques.md","mtime":"2018-07-09T20:37:18.694Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-09T20:40:22.635Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"TP #2 - Configuration Java","level":"1.2.3.10","depth":3,"previous":{"title":"Traitements pré-post-processeurs","level":"1.2.3.9","depth":3,"path":"01-context/03-configuration-java/09-pre-post.md","ref":"01-context/03-configuration-java/09-pre-post.md","articles":[]},"dir":"ltr"},"config":{"plugins":["auto-summary","github-edit"],"ignores":["_book","node_modules","sources"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"github-edit":{"repo":"DevInstitut/formation-spring-07-2018","branch":"master"},"auto-summary":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Rossi Oddet","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Formation Spring","gitbook":"*"},"file":{"path":"01-context/03-configuration-java/99-travaux-pratiques.md","mtime":"2018-07-09T21:07:06.838Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-09T21:10:42.529Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
