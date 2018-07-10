@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Notion de contrôleur · Formation Spring</title>
+        <title>Support de Bean Validation · Formation Spring</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="02-parametres.html" />
+    <link rel="next" href="99-tp.html" />
     
     
-    <link rel="prev" href="./" />
+    <link rel="prev" href="05-formulaires.html" />
     
 
     </head>
@@ -769,7 +769,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.4.2.1" data-path="01-controller.html">
+        <li class="chapter " data-level="1.4.2.1" data-path="01-controller.html">
             
                 <a href="01-controller.html">
             
@@ -834,7 +834,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2.6" data-path="06-validation.html">
+        <li class="chapter active" data-level="1.4.2.6" data-path="06-validation.html">
             
                 <a href="06-validation.html">
             
@@ -900,7 +900,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Notion de contrôleur</a>
+        <a href="../.." >Support de Bean Validation</a>
     </h1>
 </div>
 
@@ -915,37 +915,122 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="notion-de-contr&#xF4;leur">Notion de contr&#xF4;leur</h1>
-<p>Un controller est une classe java annot&#xE9;e par @Controller et sert de point d&apos;entr&#xE9;e &#xE0; la coordination des traitements et du rendu logique.</p>
-<p>Le mapping entre urls et traitements se r&#xE9;alise par apposition de l&apos;annotation <code>RequestMapping</code> sur les m&#xE9;thodes gestionnaires.</p>
-<pre><code class="lang-java"><span class="hljs-meta">@Controller</span>
-<span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/pizzas&quot;</span>)
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaController</span> </span>{
+                                <h1 id="support-de-bean-validation">Support de Bean Validation</h1>
+<p>Spring Web MVC offre un support de Bean Validation (Sp&#xE9;cification Java EE de validation d&apos;objet Java).</p>
+<p>D&#xE9;pendances Maven :</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.validation<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>validation-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${validation-api.version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 
-    <span class="hljs-comment">// Cette m&#xE9;thode est ex&#xE9;cut&#xE9;e lorsqu&apos;une requ&#xEA;te</span>
-    <span class="hljs-comment">// GET /pizzas</span>
-    <span class="hljs-comment">// est re&#xE7;ue</span>
-    <span class="hljs-meta">@RequestMapping</span>(method = RequestMethod.GET)
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">bonjour</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vuebonjour&quot;</span>;
-    }
+<span class="hljs-comment">&lt;!-- Impl&#xE9;mentation la plus utilis&#xE9;e de Bean Validation --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.hibernate<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>hibernate-validator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${hibernate-validator.version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h2 id="validation-dun-bean">Validation d&apos;un Bean</h2>
+<p>Les contraintes peuvent &#xEA;tre pos&#xE9;es directement sur les champs de l&apos;entit&#xE9; &#xE0; valider.</p>
+<p>Exemple :</p>
+<pre><code class="lang-java">
+<span class="hljs-keyword">import</span> javax.validation.constraints.Email;
+<span class="hljs-keyword">import</span> javax.validation.constraints.NotEmpty;
+<span class="hljs-keyword">import</span> javax.validation.constraints.Size;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Personne</span> </span>{
+
+    <span class="hljs-meta">@NotEmpty</span>
+    <span class="hljs-keyword">private</span> String prenom;
+
+    <span class="hljs-meta">@NotEmpty</span>
+    <span class="hljs-meta">@Size</span>(min = <span class="hljs-number">3</span>)
+    <span class="hljs-keyword">private</span> String nom;
+
+    <span class="hljs-meta">@Email</span>
+    <span class="hljs-keyword">private</span> String email;
+
+    <span class="hljs-comment">// ...</span>
 
 }
 </code></pre>
-<p>Par    d&#xE9;faut,    le type retour d&#xE9;signe <strong>le nom d&apos;une vue</strong>.</p>
-<p>L&apos;annotation <code>@ResponseBody</code> permet de fournir directement la r&#xE9;ponse &#xE0; la requ&#xEA;te sans passer par une vue.</p>
-<pre><code class="lang-java"><span class="hljs-meta">@Controller</span>
-<span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/pizzas&quot;</span>)
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaController</span> </span>{
+<h2 id="activation-de-la-validation-avec-spring-mvc">Activation de la validation avec Spring MVC</h2>
+<p>L&apos;annotation <code>@Valid</code> positionnn&#xE9; sur un objet active sa validation.</p>
+<p>Le param&#xE8;tre <code>BindingResult</code> donne acc&#xE8;s au r&#xE9;sultat de la validation.</p>
+<pre><code class="lang-java">
+    <span class="hljs-meta">@RequestMapping</span>(method = RequestMethod.POST)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> ModelAndView <span class="hljs-title">post</span><span class="hljs-params">(@ModelAttribute(<span class="hljs-string">&quot;personne&quot;</span>)</span> @Valid Personne st, BindingResult bindingResult) </span>{
 
-    <span class="hljs-meta">@RequestMapping</span>(method = RequestMethod.GET)
-    <span class="hljs-meta">@ResponseBody</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">bonjour</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vuebonjour&quot;</span>;
+        <span class="hljs-keyword">if</span>(bindingResult.hasErrors()) {
+
+            <span class="hljs-comment">// en cas d&apos;erreur</span>
+
+        } <span class="hljs-keyword">else</span> {
+
+            <span class="hljs-comment">// en cas de succ&#xE8;s</span>
+        }
+
+        <span class="hljs-comment">// Il est possible de cr&#xE9;er ses propres erreurs de validation</span>
+
+        bindingResult.reject(<span class="hljs-string">&quot;errors.obj&quot;</span>, <span class="hljs-string">&quot;L&apos;objet personne n&apos;est pas comme je veux&quot;</span>);
+
+        bindingResult.rejectValue(<span class="hljs-string">&quot;prenom&quot;</span>, <span class="hljs-string">&quot;errors.prenom&quot;</span>, <span class="hljs-string">&quot;Le champ pr&#xE9;nom n&apos;est pas comme je veux&quot;</span>);
+
+        <span class="hljs-comment">// ...</span>
+        ModelAndView mv = <span class="hljs-keyword">new</span> ModelAndView();
+
+        <span class="hljs-comment">// ...</span>
+        <span class="hljs-keyword">return</span> mv;
     }
-}
 </code></pre>
-<p>Ici    un    navigateur    affichera &quot;vuebonjour&quot;.</p>
+<h2 id="prise-en-compte-de-la-validation-dans-la-vue">Prise en compte de la validation dans la vue</h2>
+<p>Le tag <code>&lt;form:errors path=&quot;&quot;&gt;</code> permet d&apos;afficher un message d&apos;erreur issu de la validation.</p>
+<ul>
+<li>Exemple d&apos;affichage d&apos;erreurs par champ :</li>
+</ul>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form:form</span> <span class="hljs-attr">modelAttribute</span>=<span class="hljs-string">&quot;personne&quot;</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:input</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;nom&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form:input</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:errors</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;nom&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form:errors</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:input</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;prenom&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form:input</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:errors</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;prenom&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form:error</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Valider&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form:form</span>&gt;</span>
+</code></pre>
+<ul>
+<li>Exemple d&apos;affichage d&apos;erreurs en global</li>
+</ul>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form:form</span> <span class="hljs-attr">modelAttribute</span>=<span class="hljs-string">&quot;personne&quot;</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:input</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;nom&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form:input</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:input</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;prenom&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form:input</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- affiche de toutes les erreurs --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:errors</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;*&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form:errors</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Valider&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form:form</span>&gt;</span>
+</code></pre>
+<ul>
+<li>Personnalisation du message dans la page HTML.</li>
+</ul>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form:form</span> <span class="hljs-attr">modelAttribute</span>=<span class="hljs-string">&quot;personne&quot;</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:input</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;nom&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form:input</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:errors</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;nom&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Message personnalis&#xE9;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form:errors</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:input</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;prenom&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form:input</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form:errors</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;prenom&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form:error</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Valider&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form:form</span>&gt;</span>
+</code></pre>
 
                                 
                                 </section>
@@ -973,12 +1058,12 @@
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Application multi-pages">
+                <a href="05-formulaires.html" class="navigation navigation-prev " aria-label="Previous page: Formulaires">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="02-parametres.html" class="navigation navigation-next " aria-label="Next page: Paramètres des méthodes de contrôleur">
+                <a href="99-tp.html" class="navigation navigation-next " aria-label="Next page: TP #3 - Pages d'administration">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -989,7 +1074,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Notion de contrôleur","level":"1.4.2.1","depth":3,"next":{"title":"Paramètres des méthodes de contrôleur","level":"1.4.2.2","depth":3,"path":"03-mvc/02-multipage/02-parametres.md","ref":"03-mvc/02-multipage/02-parametres.md","articles":[]},"previous":{"title":"Application multi-pages","level":"1.4.2","depth":2,"path":"03-mvc/02-multipage/README.md","ref":"03-mvc/02-multipage/README.md","articles":[{"title":"Notion de contrôleur","level":"1.4.2.1","depth":3,"path":"03-mvc/02-multipage/01-controller.md","ref":"03-mvc/02-multipage/01-controller.md","articles":[]},{"title":"Paramètres des méthodes de contrôleur","level":"1.4.2.2","depth":3,"path":"03-mvc/02-multipage/02-parametres.md","ref":"03-mvc/02-multipage/02-parametres.md","articles":[]},{"title":"Retour de méthode de contrôleur","level":"1.4.2.3","depth":3,"path":"03-mvc/02-multipage/03-retour.md","ref":"03-mvc/02-multipage/03-retour.md","articles":[]},{"title":"Gestion des vues","level":"1.4.2.4","depth":3,"path":"03-mvc/02-multipage/04-vues.md","ref":"03-mvc/02-multipage/04-vues.md","articles":[]},{"title":"Formulaires","level":"1.4.2.5","depth":3,"path":"03-mvc/02-multipage/05-formulaires.md","ref":"03-mvc/02-multipage/05-formulaires.md","articles":[]},{"title":"Support de Bean Validation","level":"1.4.2.6","depth":3,"path":"03-mvc/02-multipage/06-validation.md","ref":"03-mvc/02-multipage/06-validation.md","articles":[]},{"title":"TP #3 - Pages d'administration","level":"1.4.2.7","depth":3,"path":"03-mvc/02-multipage/99-tp.md","ref":"03-mvc/02-multipage/99-tp.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["auto-summary","github-edit"],"ignores":["_book","node_modules","sources"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"github-edit":{"repo":"DevInstitut/formation-spring-07-2018","branch":"master"},"auto-summary":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Rossi Oddet","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Formation Spring","gitbook":"*"},"file":{"path":"03-mvc/02-multipage/01-controller.md","mtime":"2018-07-10T07:20:32.705Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-10T07:23:57.277Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Support de Bean Validation","level":"1.4.2.6","depth":3,"next":{"title":"TP #3 - Pages d'administration","level":"1.4.2.7","depth":3,"path":"03-mvc/02-multipage/99-tp.md","ref":"03-mvc/02-multipage/99-tp.md","articles":[]},"previous":{"title":"Formulaires","level":"1.4.2.5","depth":3,"path":"03-mvc/02-multipage/05-formulaires.md","ref":"03-mvc/02-multipage/05-formulaires.md","articles":[]},"dir":"ltr"},"config":{"plugins":["auto-summary","github-edit"],"ignores":["_book","node_modules","sources"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"github-edit":{"repo":"DevInstitut/formation-spring-07-2018","branch":"master"},"auto-summary":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Rossi Oddet","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Formation Spring","gitbook":"*"},"file":{"path":"03-mvc/02-multipage/06-validation.md","mtime":"2018-07-10T07:20:32.705Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-10T07:23:57.277Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
