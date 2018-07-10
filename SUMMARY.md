@@ -50,4 +50,5 @@
     * [Retour de méthode de contrôleur](03-mvc/02-multipage/03-retour.md)
     * [Gestion des vues](03-mvc/02-multipage/04-vues.md)
     * [Formulaires](03-mvc/02-multipage/05-formulaires.md)
-    * [Travaux Pratiques](03-mvc/02-multipage/99-tp.md)
+    * [Support de Bean Validation](03-mvc/02-multipage/06-validation.md)
+    * [TP #3 - Pages d'administration](03-mvc/02-multipage/99-tp.md)
