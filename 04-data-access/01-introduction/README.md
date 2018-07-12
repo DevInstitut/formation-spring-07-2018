@@ -29,6 +29,6 @@ Quelques exceptions::
 
 ## Spring Data
 
-Le projet Spring Data (non inclu dans Spring Framework) vise à simplifier encore plus l'accès aux données.
+Le projet Spring Data (non inclus dans Spring Framework) vise à simplifier encore plus l'accès aux données.
 
 
