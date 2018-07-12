@@ -1,4 +1,4 @@
-# Spring Web MVC
+# Spring Web MVC (Partie 1)
 
 Depuis Spring 5, 2 frameworks sont à disposition pour créer une application web :
 
