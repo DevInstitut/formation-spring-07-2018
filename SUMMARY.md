@@ -94,4 +94,4 @@
     * [@RequestBody](05-mvc-web-api/01-webapi/05-request-body.md)
     * [ResponseEntity](05-mvc-web-api/01-webapi/06-response-entity.md)
     * [Gérer les erreurs via des exceptions](05-mvc-web-api/01-webapi/07-erreurs.md)
-    * [TP #6 WEB API](05-mvc-web-api/01-webapi/99-tp.md)
+    * [TP #7 WEB API](05-mvc-web-api/01-webapi/99-tp.md)
