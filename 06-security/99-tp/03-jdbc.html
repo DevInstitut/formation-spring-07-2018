@@ -1875,10 +1875,7 @@
 <h2 id="configuration-jdbc">Configuration JDBC</h2>
 <p>L&apos;authentification va &#xEA;tre d&#xE9;sormais pilot&#xE9;e par une table <code>utilisateur</code>.</p>
 <ul>
-<li><p>Effectuer le mapping JPA de cette entit&#xE9;.</p>
-</li>
-<li><p>Compl&#xE9;ter la configuration <code>dev.config.WebSecurityConfig</code> comme suit :</p>
-</li>
+<li>Compl&#xE9;ter la configuration <code>dev.config.WebSecurityConfig</code> comme suit :</li>
 </ul>
 <pre><code class="lang-java">...
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebSecurityConfig</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WebSecurityConfigurerAdapter</span> </span>{
@@ -1905,7 +1902,7 @@
 }
 </code></pre>
 <ul>
-<li><p>Compl&#xE9;ter les scripts pour ajouter les tables utilisateurs et profil_utilisateur.</p>
+<li><p>Compl&#xE9;ter les scripts pour ajouter la table utilisateur.</p>
 </li>
 <li><p>Compl&#xE9;ter les scripts pour ajouter quelques donn&#xE9;es.</p>
 </li>
@@ -1955,7 +1952,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Authentification via JDBC","level":"1.7.3.3","depth":3,"next":{"title":"Sécurisation par profil","level":"1.7.3.4","depth":3,"path":"06-security/99-tp/04-profil.md","ref":"06-security/99-tp/04-profil.md","articles":[]},"previous":{"title":"Page de connexion personnalisée","level":"1.7.3.2","depth":3,"path":"06-security/99-tp/02-connexion.md","ref":"06-security/99-tp/02-connexion.md","articles":[]},"dir":"ltr"},"config":{"plugins":["auto-summary","github-edit"],"ignores":["_book","node_modules","sources"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"github-edit":{"repo":"DevInstitut/formation-spring-07-2018","branch":"master"},"auto-summary":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Rossi Oddet","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Formation Spring","gitbook":"*"},"file":{"path":"06-security/99-tp/03-jdbc.md","mtime":"2018-07-16T16:07:32.168Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-16T16:10:10.653Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Authentification via JDBC","level":"1.7.3.3","depth":3,"next":{"title":"Sécurisation par profil","level":"1.7.3.4","depth":3,"path":"06-security/99-tp/04-profil.md","ref":"06-security/99-tp/04-profil.md","articles":[]},"previous":{"title":"Page de connexion personnalisée","level":"1.7.3.2","depth":3,"path":"06-security/99-tp/02-connexion.md","ref":"06-security/99-tp/02-connexion.md","articles":[]},"dir":"ltr"},"config":{"plugins":["auto-summary","github-edit"],"ignores":["_book","node_modules","sources"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"github-edit":{"repo":"DevInstitut/formation-spring-07-2018","branch":"master"},"auto-summary":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Rossi Oddet","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Formation Spring","gitbook":"*"},"file":{"path":"06-security/99-tp/03-jdbc.md","mtime":"2018-07-17T09:32:58.443Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-17T09:35:20.193Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
