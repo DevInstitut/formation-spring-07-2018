@@ -49,8 +49,6 @@ public class SuperService {
 L'authentification va être désormais pilotée par une table `utilisateur`.
 
 
-* Effectuer le mapping JPA de cette entité.
-
 * Compléter la configuration `dev.config.WebSecurityConfig` comme suit :
 
 ```java
@@ -81,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 ```
 
 
-* Compléter les scripts pour ajouter les tables utilisateurs et profil_utilisateur.
+* Compléter les scripts pour ajouter la table utilisateur.
 
 * Compléter les scripts pour ajouter quelques données.
 
