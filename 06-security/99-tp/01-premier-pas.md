@@ -13,7 +13,7 @@
 
 ## Configuration de Spring Security
 
-* Ajouter la classe de configuration _dev.config.WebSecurityConfig_ :
+* Ajouter la classe de configuration `dev.config.WebSecurityConfig` :
 
 ```java
 package dev.config;
